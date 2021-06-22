@@ -2,6 +2,7 @@ import React from 'react'
 import { Button,Modal,Image } from 'react-bootstrap'
 import Comments from './comments'
 
+
 const DishDetail = (props)=>{
     return (
         <div>
@@ -16,7 +17,7 @@ const DishDetail = (props)=>{
                     <p className="text-justify">{props.dish.description}</p>
                     <b>Comments</b>
                     <hr style={{margin:"5px"}} />
-                    <Comments comments ={props.dish.comments}  />
+                    <Comments comments ={props.comment}  />
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={props.onHide}>Close</Button>

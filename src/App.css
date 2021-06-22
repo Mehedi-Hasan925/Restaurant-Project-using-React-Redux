@@ -5,3 +5,18 @@
 .App-link {
   color: #61dafb;
 }
+
+.footer {
+  background: rgb(229, 229, 229);
+  color: rgb(41, 39, 38);
+  margin-top: 20px;
+  margin-bottom: 2px;
+  margin-left: 3px;
+  margin-right: 3px;
+  max-height: 400px;
+  width: 100%;
+}
+.row {
+  margin: 0px !important;
+  padding: 0px !important;
+}

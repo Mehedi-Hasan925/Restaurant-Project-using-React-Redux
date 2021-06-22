@@ -2,11 +2,14 @@ import React, { Component } from 'react'
 import Dishes from '../../data/dishes.js'
 import MenuItem from './menuItem.js'
 import DishDetail from './dishDetails.js'
+import COMMENTS from '../../data/comments'
+
 
 class foodMenu extends Component{
     // const [modalShow, setModalShow] = useState(false);
     state={
         dishes:Dishes,
+        comments:COMMENTS,
         dishCliked:null,
         modalShow:false
     }
@@ -25,7 +28,7 @@ class foodMenu extends Component{
         })
     }
     render(){
-
+        document.title="Menu"
         const menu = this.state.dishes.map((item)=>{
             return(
                 <div className="col-md-4">
@@ -36,13 +39,16 @@ class foodMenu extends Component{
 
         let dishDetail = null;
         if(this.state.dishCliked!=null){
-            dishDetail = <DishDetail dish={this.state.dishCliked} show={this.state.modalShow} onHide={ this.hideModal} />
+            const comments=this.state.comments.filter(comment=>{
+                return comment.dishId === this.state.dishCliked.id
+            })
+            dishDetail = <DishDetail dish={this.state.dishCliked} comment={comments} show={this.state.modalShow} onHide={ this.hideModal} />
         }
         
         return(
             <div className="container">
                 <div className="row">
-                    {menu}
+                        {menu}
                     {dishDetail}
                     {/* <div className="row">
                         {dishDetail}
@@ -54,4 +60,4 @@ class foodMenu extends Component{
     }
 }
 
-export default foodMenu
+export default foodMenu;
