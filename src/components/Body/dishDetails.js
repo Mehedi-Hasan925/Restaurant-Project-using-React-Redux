@@ -1,9 +1,11 @@
 import React from 'react'
 import { Button,Modal,Image } from 'react-bootstrap'
 import Comments from './comments'
+import CommentForm from './commentForm'
 
 
 const DishDetail = (props)=>{
+    // console.log(props.comment[0].dishId);
     return (
         <div>
             <Modal {...props} size="lg" aria-labelledby="example-custom-modal-styling-title">
@@ -18,6 +20,7 @@ const DishDetail = (props)=>{
                     <b>Comments</b>
                     <hr style={{margin:"5px"}} />
                     <Comments comments ={props.comment}  />
+                    <CommentForm dishId={props.dish.id} />
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={props.onHide}>Close</Button>

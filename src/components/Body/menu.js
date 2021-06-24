@@ -1,15 +1,18 @@
 import React, { Component } from 'react'
-import Dishes from '../../data/dishes.js'
 import MenuItem from './menuItem.js'
 import DishDetail from './dishDetails.js'
-import COMMENTS from '../../data/comments'
+import {connect} from 'react-redux'
 
+
+const mapMyStoreToProps=(state)=>{
+    return{
+        dishes:state.dishes,
+        comments:state.comments
+    }
+}
 
 class foodMenu extends Component{
-    // const [modalShow, setModalShow] = useState(false);
     state={
-        dishes:Dishes,
-        comments:COMMENTS,
         dishCliked:null,
         modalShow:false
     }
@@ -29,7 +32,7 @@ class foodMenu extends Component{
     }
     render(){
         document.title="Menu"
-        const menu = this.state.dishes.map((item)=>{
+        const menu = this.props.dishes.map((item)=>{
             return(
                 <div className="col-md-4">
                     <MenuItem dish={item} key={item.id} onDishSelect={()=>this.onDishSelect(item)} />
@@ -39,7 +42,7 @@ class foodMenu extends Component{
 
         let dishDetail = null;
         if(this.state.dishCliked!=null){
-            const comments=this.state.comments.filter(comment=>{
+            const comments=this.props.comments.filter(comment=>{
                 return comment.dishId === this.state.dishCliked.id
             })
             dishDetail = <DishDetail dish={this.state.dishCliked} comment={comments} show={this.state.modalShow} onHide={ this.hideModal} />
@@ -60,4 +63,4 @@ class foodMenu extends Component{
     }
 }
 
-export default foodMenu;
+export default connect(mapMyStoreToProps) (foodMenu);

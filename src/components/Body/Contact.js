@@ -34,15 +34,15 @@ class Contact extends Component {
                     <h4 className="mt-3">Send your Feedback</h4>
                     <Form style={{padding:"15px"}} onSubmit={(event)=>this.handleSubmit(event)} >
                         <Form.Group className="mb-3">
-                            <Form.Control type="text" name="name" placeholder="Enter your Name" />
+                            <Form.Control type="text" name="name" placeholder="Enter your Name" required />
                         </Form.Group>
 
                         <Form.Group className="mb-3">
-                            <Form.Control type="email" name="email" placeholder="E-mail" />
+                            <Form.Control type="email" name="email" placeholder="E-mail" required />
                         </Form.Group>
 
                         <Form.Group className="mb-3" >
-                            <Form.Control as="textarea" rows={9}  name="message" placeholder="Message" />
+                            <Form.Control as="textarea" rows={9}  name="message" placeholder="Message" required />
                         </Form.Group>
 
                         <Button variant="success" type="submit" className="form-control" >
