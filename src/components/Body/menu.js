@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import MenuItem from './menuItem.js'
 import DishDetail from './dishDetails.js'
 import {connect} from 'react-redux'
-
+import * as actionCreator from '../../redux/ActionCreator'
+import Loading from '../Body/Loading'
 
 const mapMyStoreToProps=(state)=>{
     return{
@@ -10,6 +11,11 @@ const mapMyStoreToProps=(state)=>{
         comments:state.comments
     }
 }
+const mapDispatchToProps=(dispatch)=>{
+    return{
+        addComment:(dishId,author,rating,comment)=>dispatch(actionCreator.addComment(dishId,author,rating,comment)),
+        fetchDishes:()=>dispatch(actionCreator.fetchDishes())
+}}
 
 class foodMenu extends Component{
     state={
@@ -30,37 +36,53 @@ class foodMenu extends Component{
             modalShow:false
         })
     }
+
+    componentDidMount(){
+        this.props.fetchDishes();
+    }
     render(){
         document.title="Menu"
-        const menu = this.props.dishes.map((item)=>{
+        if(this.props.dishes.isLoading){
             return(
-                <div className="col-md-4">
-                    <MenuItem dish={item} key={item.id} onDishSelect={()=>this.onDishSelect(item)} />
+                <div>
+                    <Loading />
                 </div>
-            )
-        })
-
-        let dishDetail = null;
-        if(this.state.dishCliked!=null){
-            const comments=this.props.comments.filter(comment=>{
-                return comment.dishId === this.state.dishCliked.id
-            })
-            dishDetail = <DishDetail dish={this.state.dishCliked} comment={comments} show={this.state.modalShow} onHide={ this.hideModal} />
+            );
+        }
+        else{
+            // return(
+                const menu = this.props.dishes.dishes.map((item)=>{
+                    return(
+                        <div className="col-md-4">
+                            <MenuItem dish={item} key={item.id} onDishSelect={()=>this.onDishSelect(item)} />
+                        </div>
+                    )
+                })
+        
+                let dishDetail = null;
+                if(this.state.dishCliked!=null){
+                    const comments=this.props.comments.filter(comment=>{
+                        return comment.dishId === this.state.dishCliked.id
+                    })
+                    dishDetail = <DishDetail addComment={this.props.addComment} dish={this.state.dishCliked} comment={comments} show={this.state.modalShow} onHide={ this.hideModal} />
+                }
+                
+                return(
+                    <div className="container">
+                        <div className="row">
+                                {menu}
+                            {dishDetail}
+                            {/* <div className="row">
+                                {dishDetail}
+                            </div> */}
+                        </div>
+                        
+                    </div>
+                )
+            // )
         }
         
-        return(
-            <div className="container">
-                <div className="row">
-                        {menu}
-                    {dishDetail}
-                    {/* <div className="row">
-                        {dishDetail}
-                    </div> */}
-                </div>
-                
-            </div>
-        )
     }
 }
 
-export default connect(mapMyStoreToProps) (foodMenu);
+export default connect(mapMyStoreToProps,mapDispatchToProps) (foodMenu);

@@ -20,7 +20,7 @@ const DishDetail = (props)=>{
                     <b>Comments</b>
                     <hr style={{margin:"5px"}} />
                     <Comments comments ={props.comment}  />
-                    <CommentForm dishId={props.dish.id} />
+                    <CommentForm dishId={props.dish.id} addComment={props.addComment} />
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={props.onHide}>Close</Button>

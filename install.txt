@@ -1,0 +1,4 @@
+npm install redux react-redux --save
+npm install font-awesome --save
+install react-bootstrap bootstrap --save
+npm install redux-thunk --save

@@ -1,19 +1,18 @@
 import React from 'react'
-import {connect} from 'react-redux'
 import {Form,Button} from 'react-bootstrap'
 
-const mapDispatchToProps=(dispatch)=>{
-    return{
-        addComment:(dishId,author,rating,comment)=>dispatch({
-            type:"ADD_COMMENT",
-            payload:{
-                dishId:dishId,
-                author:author,
-                rating:rating,
-                comment:comment
-        }
-        })
-}}
+// const mapDispatchToProps=(dispatch)=>{
+//     return{
+//         addComment:(dishId,author,rating,comment)=>dispatch({
+//             type:"ADD_COMMENT",
+//             payload:{
+//                 dishId:dishId,
+//                 author:author,
+//                 rating:rating,
+//                 comment:comment
+//         }
+//         })
+// }}
 
 function handleCommentForm(event,props){
     event.preventDefault();
@@ -70,4 +69,4 @@ const commentForm=(props)=> {
     )
 }
 
-export default connect(null,mapDispatchToProps) (commentForm);
+export default commentForm;
