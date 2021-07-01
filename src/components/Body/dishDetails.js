@@ -2,6 +2,7 @@ import React from 'react'
 import { Button,Modal,Image } from 'react-bootstrap'
 import Comments from './comments'
 import CommentForm from './commentForm'
+import { baseUrl } from '../../redux/baseUrl'
 
 
 const DishDetail = (props)=>{
@@ -15,11 +16,11 @@ const DishDetail = (props)=>{
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Image src={props.dish.image} style={{height:"370px",width:"100%"}} />
+                    <Image src={baseUrl + props.dish.image} style={{height:"370px",width:"100%"}} />
                     <p className="text-justify">{props.dish.description}</p>
                     <b>Comments</b>
                     <hr style={{margin:"5px"}} />
-                    <Comments comments ={props.comment}  />
+                    <Comments comments ={props.comment} commentIsLoading={props.commentIsLoading}  />
                     <CommentForm dishId={props.dish.id} addComment={props.addComment} />
                 </Modal.Body>
                 <Modal.Footer>

@@ -14,7 +14,8 @@ const mapMyStoreToProps=(state)=>{
 const mapDispatchToProps=(dispatch)=>{
     return{
         addComment:(dishId,author,rating,comment)=>dispatch(actionCreator.addComment(dishId,author,rating,comment)),
-        fetchDishes:()=>dispatch(actionCreator.fetchDishes())
+        fetchDishes:()=>dispatch(actionCreator.fetchDishes()),
+        fetchComment:()=>dispatch(actionCreator.fetchComment())
 }}
 
 class foodMenu extends Component{
@@ -39,6 +40,7 @@ class foodMenu extends Component{
 
     componentDidMount(){
         this.props.fetchDishes();
+        this.props.fetchComment();
     }
     render(){
         document.title="Menu"
@@ -61,10 +63,10 @@ class foodMenu extends Component{
         
                 let dishDetail = null;
                 if(this.state.dishCliked!=null){
-                    const comments=this.props.comments.filter(comment=>{
+                    const comments=this.props.comments.comments.filter(comment=>{
                         return comment.dishId === this.state.dishCliked.id
                     })
-                    dishDetail = <DishDetail addComment={this.props.addComment} dish={this.state.dishCliked} comment={comments} show={this.state.modalShow} onHide={ this.hideModal} />
+                    dishDetail = <DishDetail addComment={this.props.addComment} dish={this.state.dishCliked} comment={comments} show={this.state.modalShow} onHide={ this.hideModal} commentIsLoading={this.props.comments.isLoading} />
                 }
                 
                 return(

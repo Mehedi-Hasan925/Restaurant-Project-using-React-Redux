@@ -1,6 +1,3 @@
-
-
-import comments from '../data/comments'
 import { combineReducers } from 'redux'
 import * as actionType from './ActionType'
 
@@ -33,14 +30,29 @@ const dishReducer=(dishstate={isLoading:false,dishes:[] },action)=>{
 
 }
 
-const commentsReducer=(commentState=comments,action)=>{
+const commentsReducer=(commentState={isloading:true,comments:[]},action)=>{
 
-    if(action.type==="ADD_COMMENT"){
-        let comment = action.payload;
-        comment.id = commentState.length;
-        comment.date = new Date().toDateString();
-        console.log(comment)
-        return commentState.concat(comment)
+    if(action.type===actionType.COMMENT_LOADING){
+        return{
+            ...commentState,
+            isloading:true,
+            comments:[]
+
+        }
+    }
+
+    if(action.type===actionType.COMMENT_LOADED){
+        return{
+            ...commentState,
+            isloading:false,
+            comments:action.payload
+        }
+        
+        // let comment = action.payload;
+        // comment.id = commentState.length;
+        // comment.date = new Date().toDateString();
+        // console.log(comment)
+        // return commentState.concat(comment)
     }
     return commentState;
 }

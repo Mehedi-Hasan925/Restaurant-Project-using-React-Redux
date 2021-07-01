@@ -1,7 +1,14 @@
 import React from 'react'
+import Loading from './Loading'
 
 const Comments =(props)=> {
-    return (
+    if(props.commentIsLoading){
+        return(
+            <Loading />
+        );
+    }
+    else{
+        return (
             props.comments.map((item)=>{
                 return(
                     <div key={item.id}>
@@ -16,6 +23,8 @@ const Comments =(props)=> {
                 )
             })
     )
+
+    }
 }
 
 export default Comments
