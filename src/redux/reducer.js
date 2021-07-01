@@ -41,7 +41,7 @@ const commentsReducer=(commentState={isloading:true,comments:[]},action)=>{
         }
     }
 
-    if(action.type===actionType.COMMENT_LOADED){
+    else if(action.type===actionType.COMMENT_LOADED){
         return{
             ...commentState,
             isloading:false,
@@ -54,7 +54,18 @@ const commentsReducer=(commentState={isloading:true,comments:[]},action)=>{
         // console.log(comment)
         // return commentState.concat(comment)
     }
-    return commentState;
+
+    else if(action.type===actionType.ADD_COMMENT){
+        return{
+            ...commentState,
+            comments:commentState.comments.concat(action.payload)
+        }
+
+    }
+
+    else{
+        return commentState;
+    }
 }
 
 export const reducer=combineReducers({

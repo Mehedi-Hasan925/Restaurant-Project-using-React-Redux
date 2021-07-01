@@ -9,6 +9,7 @@ const mapMyStoreToProps=(state)=>{
     return{
         dishes:state.dishes,
         comments:state.comments
+        
     }
 }
 const mapDispatchToProps=(dispatch)=>{

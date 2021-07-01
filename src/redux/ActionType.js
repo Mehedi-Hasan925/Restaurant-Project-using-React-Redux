@@ -6,3 +6,5 @@ export const DISH_LOADING = "DISH_LOADING";
 
 export const COMMENT_LOADED = "COMMENT_LOADED";
 export const COMMENT_LOADING = "COMMENT_LOADING";
+
+export const FEED_BACK="FEED_BACK";
